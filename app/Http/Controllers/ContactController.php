@@ -27,7 +27,7 @@ class ContactController extends Controller
 
         //User to send (it's me)
         $me = new User();
-        $me->email = 'gagnot.s@free.fr';
+        $me->email = env('MAIL_USERNAME');
 
         //reformat message for MarkDown
         $messageMd = preg_replace("/(.)(\n)(.)/i", '$1$2$2$3', $request->message);
