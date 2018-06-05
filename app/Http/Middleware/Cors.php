@@ -19,8 +19,15 @@ class Cors
     public function handle($request, Closure $next)
     {
 
+        $protocol = strtolower(substr($_SERVER['SERVER_PROTOCOL'],0,strpos($_SERVER['SERVER_PROTOCOL'], '/')));
+        $host = substr($_SERVER['SERVER_NAME'], strlen('api.'));
+        $accessControlAllowOrigin = $protocol . '://' . $host ;
+        if (!is_null(env('API_CORS_PORT_ALLOW'))) {
+            $accessControlAllowOrigin .= (':' . env('API_CORS_PORT_ALLOW'));
+        }
+
         $headers = [
-            'Access-Control-Allow-Origin'      => 'http://localhost:3000',
+            'Access-Control-Allow-Origin'      => $accessControlAllowOrigin,
             // CORS doesn't accept Access-Control-Allow-Origin = * for security reasons
             //'Access-Control-Allow-Origin'    => '*',
             'Access-Control-Allow-Methods'     => 'POST, OPTIONS',
