@@ -19,14 +19,14 @@ class Cors
     public function handle($request, Closure $next)
     {
 
-        $host = substr($_SERVER['SERVER_NAME'], strlen('api.'));
-        $accessControlAllowOrigin = 'https://' . $host ;
-        if (!is_null(env('API_CORS_PORT_ALLOW'))) {
-            $accessControlAllowOrigin .= (':' . env('API_CORS_PORT_ALLOW'));
-        }
+//        $host = substr($_SERVER['SERVER_NAME'], strlen('api.'));
+//        $accessControlAllowOrigin = 'https://' . $host ;
+//        if (!is_null(env('API_CORS_PORT_ALLOW'))) {
+//            $accessControlAllowOrigin .= (':' . env('API_CORS_PORT_ALLOW'));
+//        }
 
         $headers = [
-            'Access-Control-Allow-Origin'      => $accessControlAllowOrigin,
+            'Access-Control-Allow-Origin'      => env('APP_URL_FRONT'),
             // CORS doesn't accept Access-Control-Allow-Origin = * for security reasons
             //'Access-Control-Allow-Origin'    => '*',
             'Access-Control-Allow-Methods'     => 'POST, OPTIONS',
